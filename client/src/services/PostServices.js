@@ -1,6 +1,6 @@
 import Client from './'
 
-export const GetPosts = async () => {
+export const getPosts = async () => {
     try {
         const res = await Client.get('/posts')
         console.log(res, 'getting post')
@@ -10,18 +10,21 @@ export const GetPosts = async () => {
     }
 }
 
-export const GetComments = async (id) => {
+export const getComments = async (id) => {
     try {
         const res = await Client.get(`/posts/${id}`)
-        console.log(res, 'get comments')
+        console.log(res, 'getting comments')
         return res.data.comments
     } catch (error) {
         throw error
     }
 }
 
-// export const PostComments = async (postId) => {
-//     try {
-//         const res = await Client.post(`/posts/${postId}`)
-//     }
-// }
+export const postComment = async (id, comment) => {
+    try {
+        const res = await Client.post(`/posts/${id}`, comment)
+        return res.data
+    } catch (error) {
+        throw error
+    }
+}

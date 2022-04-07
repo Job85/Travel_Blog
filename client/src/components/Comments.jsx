@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { LoadComments, PostCommentAction } from '../store/actions/PostActions'
+import { LoadComments, PostComment } from '../store/actions/PostActions'
 import { useEffect, useState } from 'react'
 
 
@@ -12,7 +12,7 @@ const mapStateToProps = ({ commentsState }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchComments: (id) => dispatch(LoadComments(id)),
-        postComments: (id, comment) => dispatch(PostCommentAction(id, comment))
+        postComments: (id, comment) => dispatch(PostComment(id, comment))
     }
 }
 
@@ -53,7 +53,7 @@ const Comments = (props) => {
                 Leave Comment
             </h1>
             <div>
-                {props.commentState.comments.map((comment) => (
+                {props.commentsState.comments.map((comment) => (
                     <div className='comment' key={comment._id}>
                         <p>Comments:{comment.comment}</p>
 

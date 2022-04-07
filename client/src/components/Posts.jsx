@@ -4,9 +4,8 @@ import { LoadPosts } from '../store/actions/PostActions'
 import { useEffect } from 'react'
 
 
-
-const mapStateToProps = ({ postState }) => {
-    return { postState }
+const mapStateToProps = ({ postsState }) => {
+    return { postsState }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const Posts = (props) => {
+const Post = (props) => {
 
     useEffect(() => {
         props.fetchPosts()
@@ -23,21 +22,20 @@ const Posts = (props) => {
 
     return (
         <div>
-            <h1>
-                Create Post
-            </h1>
-            {props.postState.posts.map((post) => (
-                <ul key={post.id}>
+            {props.postsState.posts.map((post) => (
+                <div className='post' key={post.id}>
                     <h2>{post.title}</h2>
-                    <p>{post.description}</p>
+                    <p className='description'>{post.description}</p>
+                    <img className='pic' src={post.image} alt='' />
                     <div>
-                        <Link to={`/posts/${post._id}`}>Leave a comment</Link>
+                        <Link className='comment-link' to={`/posts/${post._id}`}>
+                            Leave a comment
+                        </Link>
                     </div>
-                    <img className='pics' src={post.image} alt='image'></img>
-                </ul>
+                </div>
             ))}
         </div>
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts)
+export default connect(mapStateToProps, mapDispatchToProps)(Post)
