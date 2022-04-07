@@ -7,7 +7,8 @@ const iState = {
 const CommentReducer = (state = iState, action) => {
     switch (action.type) {
         case GET_COMMENTS:
-            return { ...state, comments: action.payload }
+            state.comments = new Array(...action.payload)
+            return { ...state }
         default:
             return { ...state }
     }
